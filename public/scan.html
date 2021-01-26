@@ -1,0 +1,14 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io()
+  // Initialize
+  var search = window.location.search.replace('?','')
+  var results = {}
+  search.split('&').forEach(s => {
+    kv = s.split('=')
+    results[kv[0]] = kv[1]
+  })
+
+  socket.emit('scan', results['session'])
+</script>
+<p>Hello world</p>

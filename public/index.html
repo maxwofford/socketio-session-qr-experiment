@@ -1,0 +1,15 @@
+<p class="message">Hello world</p>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io()
+  var sessionId
+  socket.on('session_id', data => {
+    sessionId = data
+    document.querySelector('.message').text = sessionId
+  })
+  socket.on('scanned', data => {
+    alert('scan occurred!')
+  })
+  // Initialize
+  socket.emit('session_create')
+</script>
