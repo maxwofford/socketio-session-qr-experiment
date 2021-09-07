@@ -5,7 +5,11 @@
   var sessionId
   socket.on('session_id', data => {
     sessionId = data
-    document.querySelector('.message').text = sessionId
+    document.querySelector('.message').innerHTML = sessionId
+
+    const el = document.createElement('img')
+    el.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="https://chocolateampleflash.maxwofford.repl.co/scan.html?session=${sessionId}"`
+    document.querySelector('body').appendChild(el)
   })
   socket.on('scanned', data => {
     alert('scan occurred!')

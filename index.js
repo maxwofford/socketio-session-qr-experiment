@@ -10,10 +10,6 @@ const db = new Database()
 
 app.use(express.static('public'))
 
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/index.html')
-// })
-
 const sessions = {}
 
 io.on('connection', (socket) => {
@@ -23,16 +19,10 @@ io.on('connection', (socket) => {
     socket.emit('session_id', sessionId)
     sessions[sessionId] = socket
     
-    // db.set(sessionId, socket)
   })
 
-  socket.on('scan', data => {
-    console.log({data})
-    sessions[data].emit('scanned')
-    // db.get(data).then(value => {
-    //   sessions[sessionId].emit('scanned')
-    //   console.log({value})
-    // })
+  socket.on('scan', sessionId => {
+    sessions[sessionId].emit('scanned')
   })
 })
 
